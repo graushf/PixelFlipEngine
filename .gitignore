@@ -74,6 +74,14 @@ artifacts/
 *.vcxproj
 *.vcxproj.filters
 
+# Build results 2
+Lib/x64*
+Lib/x86*
+Game/x64*
+Game/x86*
+Temp/PixelFlipEngine_x64*
+Temp/PixelFlipEngine_x86*
+
 # Chutzpah Test files
 _Chutzpah*
 
