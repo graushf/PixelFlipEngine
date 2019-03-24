@@ -24,12 +24,18 @@
     <ClCompile Include="PXFRandom.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="PrimeSearch.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemoryPool.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="PXFRandom.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="PrimeSearch.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
