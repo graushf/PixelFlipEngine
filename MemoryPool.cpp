@@ -69,7 +69,7 @@ void* MemoryPool::Alloc(void)
 	// update allocation reports
 	++m_numAllocs;
 	if (m_numAllocs > m_allocPeak) {
-		m_allocPeak - m_numAllocs;
+		m_allocPeak = m_numAllocs;
 	}
 #endif
 
