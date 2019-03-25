@@ -71,8 +71,8 @@ artifacts/
 *.scc
 
 # Visual Studio thingies
-*.vcxproj
-*.vcxproj.filters
+#*.vcxproj
+#*.vcxproj.filters
 
 # Build results 2
 Lib/x64*
