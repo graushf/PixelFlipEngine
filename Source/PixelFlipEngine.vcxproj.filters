@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{9f222b56-a756-4691-aae8-4be7f95a4e7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{222fcdb4-8499-4dc8-90f2-beba176022e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\header">
+      <UniqueIdentifier>{58028793-5010-413e-96fb-f25f2112faa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\source">
+      <UniqueIdentifier>{21196d30-ead5-4e3b-ae30-bf50e4bf406e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{3527ba45-6221-4f58-b29e-5f6fb4adf39c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{d02b4bb9-3d79-498f-b66b-5b80aa5c88ea}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main\main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\MemoryPool.cpp">
+      <Filter>Utilities\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\PrimeSearch.cpp">
+      <Filter>Utilities\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\PXFRandom.cpp">
+      <Filter>Utilities\source</Filter>
+    </ClCompile>
+    <ClCompile Include="AppInst.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\CommonStd.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="App\App.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Utilities\MemoryPool.h">
+      <Filter>Utilities\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\PrimeSearch.h">
+      <Filter>Utilities\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\PXFRandom.h">
+      <Filter>Utilities\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\CommonStd.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="App\App.h">
+      <Filter>App</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

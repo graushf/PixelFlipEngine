@@ -1,0 +1,143 @@
+#define WIN32_LEAN_AND_MEAN
+
+// Windows Header Files:
+
+#define NOMINMAX
+#include <windows.h>
+#include <windowsx.h>
+
+#include <crtdbg.h>
+
+// C Runtime Header Files
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+#include <tchar.h>
+
+#include <mmsystem.h>
+
+#include <algorithm>
+#include <string>
+#include <list>
+#include <vector>
+#include <queue>
+#include <map>
+
+#if _MSC_VER >= 1700
+#include <memory>
+	using std::shared_ptr;
+	using std::weak_ptr;
+	using std::static_pointer_cast;
+	using std::dynamic_pointer_cast;
+#elif
+	using std::tr1::shared_ptr;
+	using std::tr1::weak_ptr;
+	using std::tr1::static_pointer_cast;
+	using std::tr1::dynamic_pointer_cast;
+#endif
+
+#define DXUT_AUTOLIB
+
+// DirectX Includes
+#include <dxut.h>
+#include <d3dx9tex.h>
+#include <dxut.h>
+#include <SDKmisc.h>
+
+
+
+// -------------------------------------------------------------------------------------
+// Entry point to the program. Initializes everything and goes into a message processing
+// loop. Idle time is used to render the scene
+//
+// See Game Coding Complete 4th Edition - Chapter 5, page 134
+// -------------------------------------------------------------------------------------
+
+INT WINAPI AppInst(HINSTANCE hInstance,
+					  HINSTANCE hPrevInstance,
+					  LPWSTR lpCmdLine,
+					  int nCmdShow)
+{
+	// Set up checks for memory leaks.
+	// Game Coding Complete reference - Chapter 21, page 834
+	int tmpDbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+
+	// set this flag to keep memory blocks around
+	// tmpDbgFlag |= _CRTDBG_DELAY_GREE_MEM_DF;			// this flag will cause intermittent pauses in your game and potentially cause it to run out of memory!
+
+	// perform memory check for each alloc/dealloc
+	//tmpDbgFlag |= _CRTDBG_CHECK_ALWAYS_DF;			// remember this is VERY VERY SLOW!!
+
+	//_CRTDBG_LEAK_CHECK_DF is used at program initialization to force a
+	// leak check just before program exit. This is important because
+	// some classes may dynamically allocate memory in globally constructed
+	// objects.
+	tmpDbgFlag |= _CRTDBG_LEAK_CHECK_DF;
+
+	_CrtSetDbgFlag(tmpDbgFlag);
+
+	// [rez] Initialize the logging system as the very first thing you ever do!
+	Logger::Init("logging.xml");
+
+	g_pApp->m_Options.Init("PlayerOptions.xml", lpCmdLine);
+	
+	// Set the callback functions. These functions allow the sample framework to notify
+	// the application about device changes, user input, and windows messages. The callbacks
+	// are optional so you need only set callbacks for events you're interested
+	// in. However, if you don't handle the device reset/lost callbacks then the sample
+	// framework won't be able to reset your device since the application must first
+	// release all device resources before resetting. Likewise, if you don't handle the
+	// device created/destroyed callbacks then the sample frameweork won't be able to
+	// recreate you device resources.
+
+	DXUTSetCallbackMsgProc(GameCodeApp::MsgProc);
+	DXUTSetCallbackFrameMove(GameCodeApp::OnUpdateGame);
+	DXUTSetCallbackDeviceChanging(GameCodeApp::ModifyDeviceSettings);
+
+	if (g_pApp->m_Options.m_Renderer == "Direct3D 9")
+	{
+		DXUTSetCallbackD3D9DeviceAcceptable(GameCodeApp::IsD3D9DeviceAcceptable);
+		DXUTSetCallbackD3D9DeviceCreated(GameCodeApp::OnD3D9CreateDevice);
+		DXUTSetCallbackD3D9DeviceReset(GameCodeApp::OnD3D9ResetDevice);
+		DXUTSetCallbackD3D9DeviceLost(GameCodeApp::OnD3D9LostDevice);
+		DXUTSetCallbackD3D9DeviceDestroyed(GameCodeApp::OnD3D9DestroyedDevice);
+		DXUTSetCallbackD3D9FrameRender(GameCodeApp::OnD3D9FrameRender);
+	}
+	else if (g_pApp->m_Options.m_Renderer == "Direct3D 11")
+	{
+		DXUTSetCallbackD3D11DeviceAcceptable(GameCodeApp::IsD3D11DeviceAcceptable);
+		DXUTSetCallbackD3D11DeviceCreated(GameCodeApp::OnD3D11CreateDevice);
+		DXUTSetCallbackD3D11SwapChainResized(GameCodeApp::OnD3D11ResizeSwapChain);
+		DXUTSetCallbackD3D11SwapChainReleasing(GameCodeApp::OnD3D11ReleasingSwapChain);
+		DXUTSetCallbackD3D11DeviceDestroyed(GameCodeApp::OnD3D11DestroyDevice);
+		DXUTSetCallbackD3D11FrameRender(GameCodeApp::OnD3D11FrameRender);
+	}
+	else 
+	{
+		//GCC_ASSERT(0 && "Unknown Renderer specified in game options.");
+		return false;
+	}
+
+	// Show the cursor and clip it when in full screen
+	DXUTSetCursorSettings(true, true);
+
+	// Perform application initialization
+	if (!g_pApp->InitInstance(hInstance, lpCmdLine, 0, g_pApp->m_Options.m_ScreenSize.x, g_pApp->m_Options.m_ScreenSize.y))
+	{
+		// [rez] Note: Fix memory leaks if we hit this branch. Also, print an error.
+		return FALSE;
+	}
+
+	// Pass control to the sample framework for handling the message pump and
+	// dispatching render calls. The sample framework will call your FrameMove
+	// and FrameRender callback when there is idle time between  handling window
+	// messages
+
+	DXUTMainLoop();
+	DXUTShutdown();
+
+	// [rez] Destroy the logging system at the last possible moment
+	Logger::Destroy();
+
+	return g_pApp->GetExitCode();
+}
