@@ -46,6 +46,9 @@ using std::tr1::dynamic_pointer_cast;
 #include <dxut.h>
 #include <SDKmisc.h>
 
+extern const int SCREEN_WIDTH;
+extern const int SCREEN_HEIGHT;
+
 #include "App/App.h"
 
 extern INT WINAPI AppInst
